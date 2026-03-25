@@ -1787,8 +1787,8 @@ function calculateFormalAir() {
     const advanceDeposit = parseFloat(document.getElementById('fa-advance-deposit-lc').value) || 0;
 
     const insurance = getFormalAirInsurance(foreignValue, insuranceType, insuranceManual);
-    const cif = foreignValue + insurance + freight;
-    const dutiableValue = cif * roe;
+    const cip = foreignValue + insurance + freight;
+    const dutiableValue = cip * roe;
     const customsDuty = dutiableValue * (rateDuty / 100);
     const bankCharge = isLc ? dutiableValue * 0.00125 : 0;
     const brokerageFee = getFormalAirBrokerage(dutiableValue);
@@ -1800,7 +1800,7 @@ function calculateFormalAir() {
     const totalCharges = customsDuty + vat + exciseTax + ipc + docStamp;
     const netPayable = totalCharges - (isLc ? advanceDeposit : 0);
 
-    document.getElementById('fa-cif').textContent = '$' + (cif).toFixed(2);
+    document.getElementById('fa-cip').textContent = '$' + (cip).toFixed(2);
     document.getElementById('fa-dv').textContent = formatCurrency(dutiableValue);
     document.getElementById('fa-customs-duty').textContent = formatCurrency(customsDuty);
     document.getElementById('fa-bank-charge').textContent = formatCurrency(bankCharge);
@@ -1876,7 +1876,7 @@ function calculateInformalAir() {
 
     const insurance = getInformalAirInsurance(foreignValue, insuranceType, insuranceManual);
     const cif = foreignValue + insurance + freight;
-    const dutiableValue = cif * roe;
+    const dutiableValue = cip * roe;
     const customsDuty = dutiableValue * (rateDuty / 100);
     const brokerageFee = getInformalAirBrokerage(dutiableValue);
     const docStamp = 130;
@@ -1885,7 +1885,7 @@ function calculateInformalAir() {
     const vat = vatBase * 0.12;
     const totalCharges = customsDuty + vat + exciseTax + docStamp;
 
-    document.getElementById('ia-cif').textContent = formatCurrency(cif);
+    document.getElementById('ia-cip').textContent = formatCurrency(cip);
     document.getElementById('ia-dv').textContent = formatCurrency(dutiableValue);
     document.getElementById('ia-customs-duty').textContent = formatCurrency(customsDuty);
     document.getElementById('ia-brokerage').textContent = formatCurrency(brokerageFee);
